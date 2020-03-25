@@ -1,7 +1,6 @@
 from itertools import zip_longest
 from math import pi, sqrt, factorial
 from typing import List, Union
-
 import numpy as np
 
 
@@ -54,5 +53,5 @@ class InverseCDF:
         :param A: sampled left-side area(s), can be a single float or a numpy float array
         :return: Gaussian sample(s) from applying inverse CDF to sampled area(s), can be single float or numpy float array
         """
-        sample = sqrt(2) * sum(coeff * (2*A-1) ** power for power, coeff in enumerate(self.taylor_coeffs))
+        sample = sqrt(2) * sum(coeff * (2*A-1)**power for power, coeff in enumerate(self.taylor_coeffs))
         return sample
