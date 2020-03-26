@@ -25,7 +25,7 @@ class InverseCDF:
         updated_P = [two_nEP_coeff + dP_coeff for two_nEP_coeff, dP_coeff in zip_longest(two_nEP, dP, fillvalue=0)]
         return updated_P
 
-    def get_taylor_coeffs(self, n_terms: int) -> List[int]:
+    def get_taylor_coeffs(self, n_terms: int) -> List[float]:
         """
         Get coefficients of Taylor series approximation for erfinv (up to specified number of terms)
         :param n_terms: number of terms of Taylor series
