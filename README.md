@@ -7,5 +7,6 @@ But, deep down, how does a computer know how to generate Gaussian samples? This 
 
 ## Project structure
 * **Part 1:** Generate Gaussian samples using [inverse transform sampling](https://en.wikipedia.org/wiki/Inverse_transform_sampling): [code](notebooks/part1.ipynb), [write-up](https://medium.com/@seismatica/how-to-generate-gaussian-samples-347c391b7959)
+![Taylor approx samples](viz/taylor_approx_samples.png)
 * **Part 2:** Generate Gaussian samples using [Box-Muller transform](https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform) (coming soon)
 * **Part 3:** Generate Gaussian samples using [central limit theorem](https://en.wikipedia.org/wiki/Central_limit_theorem) and transform Gaussian samples to have any means, variances and covariance (coming soon)
