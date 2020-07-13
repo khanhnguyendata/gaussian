@@ -5,12 +5,12 @@ import numpy as np
 
 
 class InverseCDF:
-    def __init__(self, power: int) -> None:
+    def __init__(self, degree: int) -> None:
         """
         Store Taylor series coefficients of erfinv
-        :param power: highest power of the Taylor series (one less than the number of terms due to constant term)
+        :param degree: highest power of the Taylor series (one less than the number of terms due to constant term)
         """
-        self.taylor_coeffs = self.get_taylor_coeffs(power + 1)
+        self.taylor_coeffs = self.get_taylor_coeffs(n_terms=degree + 1)
 
     def update_P(self, P: List[int], n: int) -> List[int]:
         """
