@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gaussian Sampling · Inverse Transform Playground</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://cdn.plot.ly" />
+    <script defer src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="hero-text">
+        <p class="eyebrow">Inverse transform sampling · Taylor approximations</p>
+        <h1>Gaussian sampling from the inverse CDF</h1>
+        <p>
+          Inspired by the explorations in <code>notebooks/part1.ipynb</code>, this web app turns the
+          Taylor-series approximation of the inverse error function into an interactive playground. Sample
+          uniform areas, push them through a tunable inverse CDF, and inspect how closely the resulting Gaussian
+          points follow the target distribution.
+        </p>
+      </div>
+      <div class="hero-card">
+        <p>Use the controls below to tweak:</p>
+        <ul>
+          <li>How many samples are drawn from <em>U(0, 1)</em></li>
+          <li>Which Taylor degree powers the inverse CDF</li>
+          <li>Independent seeds for the X/Y streams</li>
+        </ul>
+        <p class="note">Higher degrees hug the true inverse CDF but cost more arithmetic.</p>
+      </div>
+    </header>
+
+    <main>
+      <section class="controls" aria-label="controls">
+        <div class="control">
+          <label for="sampleCount">Samples</label>
+          <input id="sampleCount" type="range" min="50" max="5000" value="1000" step="50" />
+          <span class="value" data-for="sampleCount">1000</span>
+        </div>
+        <div class="control">
+          <label for="degree">Taylor degree</label>
+          <input id="degree" type="range" min="1" max="50" value="21" step="2" />
+          <span class="value" data-for="degree">21</span>
+        </div>
+        <div class="control sm">
+          <label for="seedX">Seed (X)</label>
+          <input id="seedX" type="number" min="1" max="900719925" value="42" />
+        </div>
+        <div class="control sm">
+          <label for="seedY">Seed (Y)</label>
+          <input id="seedY" type="number" min="1" max="900719925" value="24" />
+        </div>
+        <button id="resample" class="primary">Resample</button>
+      </section>
+
+      <section class="metrics" aria-label="approximation quality">
+        <div>
+          <p class="metric-label">RMSE vs degree-50 reference</p>
+          <p class="metric-value" id="rmseMetric">—</p>
+        </div>
+        <div>
+          <p class="metric-label">Max abs error</p>
+          <p class="metric-value" id="maxErrorMetric">—</p>
+        </div>
+        <div>
+          <p class="metric-label">Sampling window</p>
+          <p class="metric-value" id="windowMetric">—</p>
+        </div>
+      </section>
+
+      <section class="charts" aria-label="visualizations">
+        <article>
+          <header>
+            <h2>Inverse CDF approximation</h2>
+            <p>
+              The orange curve shows the Taylor approximation for the selected degree, while the navy curve uses
+              50 terms as a proxy for the "true" inverse error function.
+            </p>
+          </header>
+          <div id="mapChart" class="chart"></div>
+        </article>
+
+        <article>
+          <header>
+            <h2>Uniform areas → Gaussian coordinates</h2>
+            <p>
+              Independent uniform streams are mapped to Gaussian samples coordinate-wise. Compare the square on the
+              left with the bell-shaped scatter on the right.
+            </p>
+          </header>
+          <div class="chart-grid">
+            <div id="uniformChart" class="chart"></div>
+            <div id="gaussianChart" class="chart"></div>
+          </div>
+        </article>
+
+        <article>
+          <header>
+            <h2>1-D marginal check</h2>
+            <p>
+              Histogram of the X samples (orange) compared with the analytic Gaussian PDF (line). Heavy tails reveal
+              when the Taylor approximation drifts.
+            </p>
+          </header>
+          <div id="histChart" class="chart"></div>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Built with vanilla JavaScript and Plotly. Equations follow the derivations from
+        <code>part1.ipynb</code>: integrate the Gaussian PDF to get the CDF, invert via a Taylor expansion of the
+        error function, and feed uniform variates through it.
+      </p>
+    </footer>
+  </body>
+</html>

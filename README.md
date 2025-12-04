@@ -12,3 +12,13 @@ But, deep down, how does a computer know how to generate Gaussian samples? This 
 ![box muller sample](viz/box_muller_annotated_twitter.gif)
 * **Part 3:** Generate Gaussian samples using [central limit theorem](https://en.wikipedia.org/wiki/Central_limit_theorem) and transform Gaussian samples to have any means, variances and covariance: [code](notebooks/part2.ipynb), [write-up](https://medium.com/@seismatica/how-to-generate-gaussian-samples-1cbf46b49751?source=friends_link&sk=8336b7f2b24c3f09fc1e518793b76544)
 ![central limit theorem](viz/clt.gif)
+
+## Web playground: inverse CDF
+
+The new `web/` directory contains a lightweight, framework-free app that mirrors the logic from `notebooks/part1.ipynb`. Open `web/index.html` in any modern browser (or run a local static server) to:
+
+- dial in the Taylor degree used to approximate the inverse error function,
+- sample thousands of uniform areas with independent seeds for the X/Y streams,
+- inspect the induced Gaussian scatter, 1-D histogram, and the approximation error against a degree-50 reference curve.
+
+All computations are handled client-side in vanilla JavaScript, while Plotly renders the interactive charts.
