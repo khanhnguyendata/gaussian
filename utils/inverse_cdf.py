@@ -3,7 +3,7 @@ from math import pi, sqrt, factorial
 from typing import List, Union
 import numpy as np
 
-
+test2
 class InverseCDF:
     def __init__(self, degree: int) -> None:
         """
