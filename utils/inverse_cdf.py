@@ -2,7 +2,7 @@ from itertools import zip_longest
 from math import pi, sqrt, factorial
 from typing import List, Union
 import numpy as np
-
+test
 
 class InverseCDF:
     def __init__(self, degree: int) -> None:
